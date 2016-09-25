@@ -8,10 +8,16 @@ import {
 //-------------------------------------------------------------------//
 
 export default class SearchBar extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.onEnter = this.onEnter.bind(this);
+  }
+
   render() {
     return (
       <Row className="search-bar">
-        <Col xs={12} md={8} mdOffset={2} lg={6} lgOffset={3}>
+        <Col xs={12} sm={10} smOffset={1} md={8} mdOffset={2} lg={6} lgOffset={3}>
           <form id="search">
             <FormGroup>
               <InputGroup bsSize='large'>
@@ -20,9 +26,10 @@ export default class SearchBar extends React.Component {
                   placeholder='Search For Recipes'
                   id='searchbar'
                   onChange={this.props.filterRecipes}
+                  onKeyPress={this.onEnter}
                 />
                 <InputGroup.Button>
-                  <Button onClick={this.props.openModal} >Add New Recipe</Button>
+                  <Button onClick={this.props.toggleModal} >Add New Recipe</Button>
                 </InputGroup.Button>
               </InputGroup>
             </FormGroup>
@@ -31,4 +38,18 @@ export default class SearchBar extends React.Component {
       </Row>
     )
   }
+
+  onEnter(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      event.stopPropagation();
+      this.props.toggleModal();
+    }
+  }
+
+};
+
+SearchBar.propTypes = {
+  filterRecipes: React.PropTypes.func,
+  toggleModal: React.PropTypes.func,
 }

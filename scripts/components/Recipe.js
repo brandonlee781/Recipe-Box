@@ -30,6 +30,7 @@ export default class Recipe extends React.Component {
       const ingKey = this.props.data.id + '-' + this.props.data.ingredients.indexOf(data);
       return <li key={ingKey}>{data}</li>
     },this)
+    
     if(this.state.open) {
       return (
         <div key={this.props.data.id}>
@@ -38,7 +39,7 @@ export default class Recipe extends React.Component {
             {ingList}
           </ul>
           <ButtonGroup>
-            <Button onClick={this.props.openModal.bind(this,this.props.data)}>Edit</Button>
+            <Button onClick={this.props.editRecipe.bind(this,this.props.data.id)}>Edit</Button>
             <Button bsStyle="danger" onClick={this.props.deleteRecipe.bind(this,this.props.data.id)}>Delete</Button>
           </ButtonGroup>
           </div>
@@ -52,5 +53,11 @@ export default class Recipe extends React.Component {
       )
     }
   }
+}
 
+Recipe.propTypes = {
+  data: React.PropTypes.object,
+  deleteRecipe: React.PropTypes.func,
+  toggleModal: React.PropTypes.func,
+  editRecipe: React.PropTypes.func,
 }

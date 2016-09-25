@@ -22,7 +22,7 @@ export default class RecipeList extends React.Component {
   render() {
     return (
       <Row className="recipe-list">
-        <Col xs={12} md={8} mdOffset={2} lg={6} lgOffset={3}>
+        <Col xs={12} sm={10} smOffset={1} md={8} mdOffset={2} lg={6} lgOffset={3}>
           {this.recipeList()}
         </Col>
       </Row>
@@ -33,7 +33,7 @@ export default class RecipeList extends React.Component {
     if(this.props.data < 1) {
       return (
         <div className="center">
-          <h2>There doesn't seem to be anything here.</h2>
+          <h3>There doesn't seem to be anything here.</h3>
           <p>You should either narrow your search or create a new recipe.</p>
         </div>
       )
@@ -44,10 +44,18 @@ export default class RecipeList extends React.Component {
           key={data.id}
           data={data}
           deleteRecipe={this.props.deleteRecipe}
-          openModal={this.props.openModal}
+          editRecipe={this.props.editRecipe}
+          toggleModal={this.props.toggleModal}
         />
       )
     },this);
     return list;
   }
+}
+
+RecipeList.propTypes = {
+  data: React.PropTypes.array,
+  deleteRecipe: React.PropTypes.func,
+  toggleModal: React.PropTypes.func,
+  getDataForModal: React.PropTypes.func
 }
